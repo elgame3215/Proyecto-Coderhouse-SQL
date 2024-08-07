@@ -62,3 +62,9 @@ CREATE TABLE titulo (
     FOREIGN KEY(id_club_campeon) REFERENCES club(id_club),
     FOREIGN KEY(id_copa) REFERENCES copa(id_copa)
 );
+
+CREATE TABLE posicion (
+	id_posicion int NOT NULL,
+	nombre varchar(30) NOT NULL,
+	PRIMARY KEY (id_posicion)
+);
