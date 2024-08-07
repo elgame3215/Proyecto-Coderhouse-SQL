@@ -9,12 +9,6 @@ CREATE TABLE club (
     PRIMARY KEY(id_club)
 );
 
-CREATE TABLE plantel (
-	id_plantel INT NOT NULL UNIQUE AUTO_INCREMENT,
-    id_club INT NOT NULL,
-    FOREIGN KEY(id_club) REFERENCES club(id_club)
-);
-
 CREATE TABLE provincia (
 	id_provincia INT NOT NULL UNIQUE AUTO_INCREMENT,
     nombre VARCHAR(30) NOT NULL,
@@ -25,22 +19,22 @@ CREATE TABLE tecnico (
 	id_tecnico INT NOT NULL UNIQUE AUTO_INCREMENT,
     nombre VARCHAR(30) NOT NULL,
     apellido VARCHAR(30) NOT NULL,
-    id_plantel INT NOT NULL,
+    id_club INT NOT NULL,
     id_provincia INT NOT NULL,
     PRIMARY KEY(id_tecnico),
     FOREIGN KEY(id_provincia) REFERENCES provincia(id_provincia),
-    FOREIGN KEY(id_plantel) REFERENCES plantel(id_plantel)
+    FOREIGN KEY(id_club) REFERENCES club(id_club)
 );
 
 CREATE TABLE jugador (
 	id_jugador INT NOT NULL UNIQUE AUTO_INCREMENT,
     nombre VARCHAR(30) NOT NULL,
     apellido VARCHAR(30) NOT NULL,
-    id_plantel INT NOT NULL,
+    id_club INT NOT NULL,
     id_provincia INT NOT NULL,
     PRIMARY KEY(id_jugador),
     FOREIGN KEY(id_provincia) REFERENCES provincia(id_provincia),
-    FOREIGN KEY(id_plantel) REFERENCES plantel(id_plantel)
+    FOREIGN KEY(id_club) REFERENCES club(id_club)
 );
 
 CREATE TABLE estadio (
