@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS clubes;
-CREATE DATABASE clubes;
-USE clubes;
+DROP DATABASE IF EXISTS primera_division;
+CREATE DATABASE primera_division;
+USE primera_division;
 
 CREATE TABLE club (
 	id_club INT NOT NULL UNIQUE AUTO_INCREMENT,
