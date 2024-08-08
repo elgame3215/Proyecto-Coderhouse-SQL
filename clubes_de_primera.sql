@@ -5,7 +5,7 @@ USE primera_division;
 CREATE TABLE club (
 	id_club INT NOT NULL UNIQUE AUTO_INCREMENT,
     nombre VARCHAR(30) NOT NULL,
-    anyo_de_fundacion YEAR NOT NULL,
+    anyo_de_fundacion INT NOT NULL,
     PRIMARY KEY(id_club)
 );
 
