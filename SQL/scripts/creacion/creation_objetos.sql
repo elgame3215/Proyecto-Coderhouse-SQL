@@ -70,17 +70,11 @@ GROUP BY
 -----------------------------------------------------------------------
 -- STORED PROCEDURES
 -----------------------------------------------------------------------
-DELIMITER / /
 DROP PROCEDURE IF EXISTS sp_traspasar_jugador;
 
-CREATE PROCEDURE sp_traspasar_jugador (IN id_jugador INT, IN id_club INT) BEGIN IF id_club != (
-	SELECT
-		j.id_club
-	FROM
-		jugador j
-	WHERE
-		j.id_jugador = id_jugador
-) THEN
+DELIMITER / /
+CREATE PROCEDURE sp_traspasar_jugador (IN id_jugador INT, IN id_club INT) BEGIN IF (id_club != 
+(SELECT j.id_club FROM jugador j WHERE j.id_jugador = id_jugador)) THEN
 UPDATE jugador j
 SET
 	j.id_club = id_club
@@ -91,20 +85,23 @@ END IF;
 
 END / /
 DROP PROCEDURE IF EXISTS sp_retirar_jugador;
-
+/ /
 CREATE PROCEDURE sp_retirar_jugador (IN id_jugador INT) BEGIN
 DELETE FROM jugador j
 WHERE
 	j.id_jugador = id_jugador;
 
-END / /
+END
+/ /
 -----------------------------------------------------------------------
 -- FUNCTIONS
 -----------------------------------------------------------------------
-/ /
 DROP FUNCTION IF EXISTS cantidad_jugadores_club;
-
-CREATE FUNCTION cantidad_jugadores_club (id_club INT) RETURNS int READS SQL DATA BEGIN DECLARE cantidad INT;
+/ /
+CREATE FUNCTION cantidad_jugadores_club (id_club INT) RETURNS INT
+READS SQL DATA 
+BEGIN 
+DECLARE cantidad INT;
 
 SET
 	cantidad = (
@@ -120,8 +117,10 @@ RETURN cantidad;
 
 END / /
 DROP FUNCTION IF EXISTS club_tecnico;
-
-CREATE FUNCTION club_tecnico (id_tecnico INT) RETURNS varchar(30) READS SQL DATA BEGIN DECLARE nombre VARCHAR(30);
+/ /
+CREATE FUNCTION club_tecnico (id_tecnico INT) RETURNS varchar(30) READS SQL DATA
+BEGIN
+DECLARE nombre VARCHAR(30);
 
 SET
 	nombre = (
@@ -142,6 +141,7 @@ END / /
 -----------------------------------------------------------------------
 DROP TRIGGER IF EXISTS tr_retirar_jugador;
 
+/ /
 CREATE TRIGGER tr_retirar_jugador AFTER DELETE ON jugador FOR EACH ROW
 INSERT INTO
 	jugador_retirado (
@@ -161,13 +161,13 @@ VALUES
 		OLD.id_posicion,
 		OLD.pierna_habil
 	);
-
 / /
-DROP TRIGGER IF EXISTS tr_traspasar_jugador;
 
+DROP TRIGGER IF EXISTS tr_traspasar_jugador;
+/ /
 CREATE TRIGGER `tr_traspasar_jugador` AFTER
 UPDATE ON jugador FOR EACH ROW
 INSERT INTO
 	transferencia (id_jugador, id_antiguo_club, id_nuevo_club)
 VALUES
-	(NEW.id_jugador, OLD.id_club, NEW.id_club)
+	(NEW.id_jugador, OLD.id_club, NEW.id_club) / /

@@ -186,7 +186,7 @@ INSERT INTO tecnico (id_tecnico,nombre,apellido,id_club,id_provincia) VALUES (10
 INSERT INTO tecnico (id_tecnico,nombre,apellido,id_club,id_provincia) VALUES (13,'gustavi','munua',3,1);
 INSERT INTO tecnico (id_tecnico,nombre,apellido,id_club,id_provincia) VALUES (14,'julio','vaccari',13,1);
 INSERT INTO tecnico (id_tecnico,nombre,apellido,id_club,id_provincia) VALUES (17,'marcelo','mendez',10,12);
-INSERT INTO tecnico (id_tecnico,nombre,apellido,id_club,id_provincia) VALUES (18,'marcelo','gallardo',21,1);
+INSERT INTO tecnico (id_tecnico,nombre,apellido,id_club,id_provincia) VALUES (18,'marcelo','sapardo',21,1);
 INSERT INTO tecnico (id_tecnico,nombre,apellido,id_club,id_provincia) VALUES (20,'diego','martinez',6,1);
 INSERT INTO tecnico (id_tecnico,nombre,apellido,id_club,id_provincia) VALUES (21,'miguel','russo',22,20);
 INSERT INTO tecnico (id_tecnico,nombre,apellido,id_club,id_provincia) VALUES (23,'pablo','guede',1,13);

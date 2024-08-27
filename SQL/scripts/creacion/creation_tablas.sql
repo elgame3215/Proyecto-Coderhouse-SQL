@@ -27,8 +27,8 @@ CREATE TABLE
 		id_club INT NOT NULL,
 		id_provincia INT NOT NULL,
 		PRIMARY KEY (id_tecnico),
-		FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia),
-		FOREIGN KEY (id_club) REFERENCES club (id_club)
+		CONSTRAINT fk_tecnico_provincia FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia),
+		CONSTRAINT fk_tecnico_club FOREIGN KEY (id_club) REFERENCES club (id_club)
 	);
 
 CREATE TABLE
@@ -47,11 +47,11 @@ CREATE TABLE
 		id_provincia INT NOT NULL,
 		id_posicion INT,
 		pierna_habil VARCHAR(1),
-		dorsal INT,
+		dorsal INT NOT NULL,
 		PRIMARY KEY (id_jugador),
-		FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia),
-		FOREIGN KEY (id_club) REFERENCES club (id_club),
-		FOREIGN KEY (id_posicion) REFERENCES posicion (id_posicion)
+		CONSTRAINT fk_jugador_provincia FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia),
+		CONSTRAINT fk_jugador_club FOREIGN KEY (id_club) REFERENCES club (id_club),
+		CONSTRAINT fk_jugador_posicion FOREIGN KEY (id_posicion) REFERENCES posicion (id_posicion)
 	);
 
 CREATE TABLE
@@ -62,8 +62,8 @@ CREATE TABLE
 		id_club INT NOT NULL UNIQUE,
 		id_provincia INT NOT NULL,
 		PRIMARY KEY (id_estadio),
-		FOREIGN KEY (id_club) REFERENCES club (id_club),
-		FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia)
+		CONSTRAINT fk_estadio_club FOREIGN KEY (id_club) REFERENCES club (id_club),
+		CONSTRAINT fk_estadio_provincia FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia)
 	);
 
 CREATE TABLE
@@ -79,8 +79,8 @@ CREATE TABLE
 		id_copa INT NOT NULL,
 		edicion YEAR NOT NULL,
 		PRIMARY KEY (id_club_campeon, id_copa, edicion),
-		FOREIGN KEY (id_club_campeon) REFERENCES club (id_club),
-		FOREIGN KEY (id_copa) REFERENCES copa (id_copa)
+		CONSTRAINT fk_titulo_club FOREIGN KEY (id_club_campeon) REFERENCES club (id_club),
+		CONSTRAINT fk_titulo_copa FOREIGN KEY (id_copa) REFERENCES copa (id_copa)
 	);
 
 CREATE TABLE
@@ -92,8 +92,8 @@ CREATE TABLE
 		id_posicion INT,
 		pierna_habil VARCHAR(1),
 		PRIMARY KEY (id_jugador_retirado),
-		FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia),
-		FOREIGN KEY (id_posicion) REFERENCES posicion (id_posicion)
+		CONSTRAINT fk_jugador_retirado_provincia FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia),
+		CONSTRAINT fk_jugador_retirado_posicion FOREIGN KEY (id_posicion) REFERENCES posicion (id_posicion)
 	);
 
 CREATE TABLE
@@ -102,7 +102,7 @@ CREATE TABLE
 		id_antiguo_club INT NOT NULL,
 		id_nuevo_club INT NOT NULL,
 		PRIMARY KEY (id_jugador, id_antiguo_club, id_nuevo_club),
-		FOREIGN KEY(id_jugador) REFERENCES jugador(id_jugador) ON DELETE CASCADE,
-		FOREIGN KEY(id_antiguo_club) REFERENCES club(id_club) ON DELETE CASCADE,
-		FOREIGN KEY(id_nuevo_club) REFERENCES club(id_club) ON DELETE CASCADE
+		CONSTRAINT fk_transferencia_jugador FOREIGN KEY(id_jugador) REFERENCES jugador(id_jugador) ON DELETE CASCADE,
+		CONSTRAINT fk_transferencia_antiguo_club FOREIGN KEY(id_antiguo_club) REFERENCES club(id_club) ON DELETE CASCADE,
+		CONSTRAINT fk_transferencia_nuevo_club FOREIGN KEY(id_nuevo_club) REFERENCES club(id_club) ON DELETE CASCADE
 	)
