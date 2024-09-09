@@ -73,7 +73,7 @@ GROUP BY
 DROP PROCEDURE IF EXISTS sp_traspasar_jugador;
 
 DELIMITER / /
-CREATE PROCEDURE sp_traspasar_jugador (IN id_jugador INT, IN id_club INT) BEGIN IF (id_club != 
+CREATE PROCEDURE sp_traspasar_jugador (IN id_jugador INT, IN id_club INT) BEGIN IF (id_club !=
 (SELECT j.id_club FROM jugador j WHERE j.id_jugador = id_jugador)) THEN
 UPDATE jugador j
 SET
@@ -93,14 +93,22 @@ WHERE
 
 END
 / /
+DROP PROCEDURE IF EXISTS sp_cant_jugadores_por_pierna_habil;
+/ /
+CREATE PROCEDURE sp_cant_jugadores_por_pierna_habil () BEGIN
+SELECT pierna_habil, COUNT(*) AS cant_jugadores
+FROM jugador
+GROUP BY pierna_habil;
+END
+/ /
 -----------------------------------------------------------------------
 -- FUNCTIONS
 -----------------------------------------------------------------------
 DROP FUNCTION IF EXISTS cantidad_jugadores_club;
 / /
 CREATE FUNCTION cantidad_jugadores_club (id_club INT) RETURNS INT
-READS SQL DATA 
-BEGIN 
+READS SQL DATA
+BEGIN
 DECLARE cantidad INT;
 
 SET
